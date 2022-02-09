@@ -1,6 +1,6 @@
 import React from 'react'
 
-const App = ({ title }) =>
-  <div>{title}</div>
+const App = () =>
+  <div>Hello React! with webpack</div> 
 
 export default App
