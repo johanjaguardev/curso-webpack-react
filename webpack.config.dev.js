@@ -1,26 +1,17 @@
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const minicssExtractPlugin = require('mini-css-extract-plugin')
-const cssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const terserPlugin = require('terser-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = {
   entry: ['./src/index.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js',
-    publicPath: "/",
-    clean: true
+    filename: 'bundle.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
-    alias: {
-      '@components': path.resolve(__dirname, 'src/components/'),
-      '@styles': path.resolve(__dirname, 'src/styles/')
-    }
+    extensions: ['.js', '.jsx']
   },
-  mode: 'production',
+  mode: 'development', 
   module: {
     rules: [
       {
@@ -35,7 +26,7 @@ module.exports = {
       }, {
         test: /\.s[ac]ss$/,
         use: [
-          minicssExtractPlugin.loader,
+          'style-loader',
           'css-loader',
           'sass-loader'
         ]
@@ -49,14 +40,14 @@ module.exports = {
     }),
     new minicssExtractPlugin({
       filename: '[name].css'
-    }),
-    new CleanWebpackPlugin()
+    })
   ],
-  optimization: {
-    minimize: true,
-    minimizer: [
-      new cssMinimizerPlugin(),
-      new terserPlugin()
-    ]
+  devServer: {
+    static: {
+        directory: path.join(__dirname, 'dist'),
+    },
+    compress: true,
+    port: 5069,
+    open: true
   }
 }
