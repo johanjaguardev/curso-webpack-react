@@ -1,6 +1,9 @@
-import react from 'react'
-import reactDom from 'react-dom'
-import reactDOM from 'react-dom'
-import App from './components/App'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-reactDom.render(<App />, document.getElementById('app'))
+const title = 'React with Webpack and Babel';
+
+ReactDOM.render(
+  <div>{title}</div>,
+  document.getElementById('app')
+);
